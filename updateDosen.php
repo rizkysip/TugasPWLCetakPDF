@@ -80,7 +80,7 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 
 ?>
 <div class="utama">
-	<h2 class="text-center">Daftar Mahasiswa</h2>
+	<h2 class="text-center">Daftar Dosen</h2>
 	<div class="text-center"><a href="prnDosenPdf.php"><span class="fas fa-print">&nbsp;Print</span></a></div>
 	<span class="float-left">
 		<a class="btn btn-success" href="addDosen.php">Tambah Data</a>
@@ -152,8 +152,8 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 				<td><?php echo $row["namadosen"]?></td>
 				<td><?php echo $row["homebase"]?></td>
 				<td>
-				<a class="btn btn-outline-primary btn-sm" href="editDosen.php?kode=<?php echo $row['npp']?>">Edit</a>
-				<a class="btn btn-outline-danger btn-sm" href="hpsDosen.php?kode=<?php echo $row["npp"]?>" id="linkHps" onclick="return confirm('Yakin dihapus nih?')">Hapus</a>
+				<a class="btn btn-outline-primary btn-sm" href="editDosen.php?npp=<?php echo encryptid($row["npp"])?>">Edit</a>
+				<a class="btn btn-outline-danger btn-sm" href="hpsDosen.php?npp=<?php echo encryptid($row["npp"])?>" id="linkHps" onclick="return confirm('Yakin dihapus nih?')">Hapus</a>
 				</td>
 			</tr>
 			<?php 
