@@ -1,9 +1,13 @@
 {
-    "autoload": {
-        "psr-4": {
-             "Libraries\\": "vendor"
+    "name": "rizky/pweblanjut_minggu13",
+    "description": "Tugas Minggu 13 PWEB Lanjut Cetak PDF",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Rizky Ramadhani"
         }
-     },
+    ],
     "require": {
         "dompdf/dompdf": "^2.0"
     }

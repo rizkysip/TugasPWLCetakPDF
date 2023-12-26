@@ -24,7 +24,7 @@
 		<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
 	  		<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 		</div>	
-		<form method="post" action="sv_addDosen.php" enctype="multipart/form-data">
+		<form method="post" action="sv_addDosen.php">
 			<div class="form-inline">
 				<label for="npp" class="mr-sm-2">NPP:</label>
                 <input class="form-control" type="number" placeholder="0686.11" readonly>             

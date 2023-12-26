@@ -28,56 +28,17 @@
 <body>
 <?php
 
-//memanggil file berisi fungsi2 yang sering dipakai
 require "fungsi.php";
 require "head.html";
 
-/*	---- cetak data per halaman ---------	*/
-
-//--------- konfigurasi
-
-//jumlah data per halaman
-$jmlDataPerHal = 5;
-
-//cari jumlah data
-if (isset($_POST['cari'])){
-	$cari=$_POST['cari'];
-	$sql="select * from dosen where npp like'%$cari%' or
-						  namadosen like '%$cari%' or
-						  homebase like '%$cari%'";
-}else{
-	$sql="select * from dosen";		
+if(isset($_POST['cari'])) {
+	$cari = $_POST['cari'];
+	$rs = search('dosen', "npp like '%$cari%' or
+								namadosen like '%$cari%' or
+								homebase like '%$cari%'");
+} else {
+	$rs = search('dosen');
 }
-$qry = mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
-$jmlData = mysqli_num_rows($qry);
-
-$jmlHal = ceil($jmlData / $jmlDataPerHal);
-if (isset($_GET['hal'])){
-	$halAktif=$_GET['hal'];
-}else{
-	$halAktif=1;
-}
-
-$awalData=($jmlDataPerHal * $halAktif)-$jmlDataPerHal;
-
-//Jika tabel data kosong
-$kosong=false;
-if (!$jmlData){
-	$kosong=true;
-}
-//data berdasar pencarian atau tidak
-if (isset($_POST['cari'])){
-	$cari=$_POST['cari'];
-	$sql="select * from dosen where npp like'%$cari%' or
-                            namadosen like '%$cari%' or
-                            homebase like '%$cari%'
-						  limit $awalData,$jmlDataPerHal";
-}else{
-	$sql="select * from dosen limit $awalData,$jmlDataPerHal";		
-}
-//Ambil data untuk ditampilkan
-$hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
-
 ?>
 <div class="utama">
 	<h2 class="text-center">Daftar Dosen</h2>
@@ -92,7 +53,7 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 		</form>
 	</span>
 	<br><br>
-	<ul class="pagination">
+	<!-- <ul class="pagination">
 		<?php
 		//navigasi pagination
 		//cetak navigasi back
@@ -114,7 +75,7 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 			echo "<li class='page-item'><a class='page-link' href=?hal=$forward>&raquo;</a></li>";
 		}
 		?>
-	</ul>	
+	</ul>	 -->
 	<!-- Cetak data dengan tampilan tabel -->
 	<table class="table table-hover">
 	<thead class="thead-light">
@@ -129,7 +90,7 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 	<tbody>
 	<?php
 	//jika data tidak ada
-	if ($kosong){
+	if (mysqli_num_rows($rs) == 0){
 		?>
 		<tr><th colspan="6">
 			<div class="alert alert-info alert-dismissible fade show text-center">
@@ -139,12 +100,8 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 		</th></tr>
 		<?php
 	}else{	
-		if($awalData==0){
-			$no=$awalData+1;
-		}else{
-			$no=$awalData;
-		}
-		while($row=mysqli_fetch_assoc($hasil)){
+		$no = 1;
+		while($row=mysqli_fetch_assoc($rs)){
 			?>	
 			<tr>
 				<td><?php echo $no?></td>

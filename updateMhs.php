@@ -156,7 +156,9 @@ $hasil=mysqli_query($koneksi,$sql) or die(mysqli_error($koneksi));
 				<td>
 				<a class="btn btn-outline-primary btn-sm" href="editMhs.php?kode=<?php echo $row['id']?>">Edit</a>
 				<a class="btn btn-outline-danger btn-sm" href="hpsMhs.php?kode=<?php echo $row["id"]?>" id="linkHps" onclick="return confirm('Yakin dihapus nih?')">Hapus</a>
-				</td>
+				<a class="btn btn-success btn-sm" href="inputKRS.php?nim=<?php echo $row["nim"]?>">Input KRS</a>
+				<a class="btn btn-secondary btn-sm" href="cetakpdf.php?type=krs&param=<?php echo $row["nim"]?>">Cetak KRS PDF</a>
+			</td>
 			</tr>
 			<?php 
 			$no++;

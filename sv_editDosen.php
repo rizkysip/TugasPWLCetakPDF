@@ -14,16 +14,16 @@ $homebase = $_POST["homebase"];
 
 $sqlDosen = mysqli_query($koneksi, "SELECT * FROM dosen WHERE npp = '$fixNpp'");
 $numDosen = mysqli_num_rows($sqlDosen);
-if($numDosen == 0) {
+// if($numDosen == 0) {
     $sql = mysqli_query($koneksi, "UPDATE dosen SET npp = '$fixNpp', namadosen = '$namadosen', homebase = '$homebase' WHERE npp = '$id'");
     header("location:updateDosen.php");
-} else {
-    echo "<script>
-          alert('NPP sudah ada')
-          javascript:history.go(-1)
-          </script>";
+// } else {
+//     echo "<script>
+//           alert('NPP sudah ada')
+//           javascript:history.go(-1)
+//           </script>";
           
-}
+// }
 
 
 } else {
